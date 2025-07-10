@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Register - SecurePortal</title>
+    <script>
+      function validatePassword() {
+          var pwd = document.getElementById("password").value;
+          var msg = "";
+          if(pwd.length < 8){
+              msg = "Password must be at least 8 characters.";
+          } else if(!(/[A-Z]/.test(pwd))){
+              msg = "Password must include at least one uppercase letter.";
+          } else if(!(/[a-z]/.test(pwd))){
+              msg = "Password must include at least one lowercase letter.";
+          } else if(!(/[\W_]/.test(pwd))){
+              msg = "Password must include at least one special character.";
+          }
+          document.getElementById("pwdMsg").innerText = msg;
+          return (msg === "");
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Register</h2>
+    <form method="POST" action="/register" onsubmit="return validatePassword();">
+      Username: <input type="text" name="username" required /><br>
+      Password: <input type="password" name="password" id="password" required onkeyup="validatePassword();" /><br>
+      <span id="pwdMsg" style="color:red;"></span><br>
+      Role: 
+      <select name="role">
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+      </select><br>
+      <input type="submit" value="Register" />
+    </form>
+    <p><a href="index.html">Home</a></p>
+  </body>
+</html>
